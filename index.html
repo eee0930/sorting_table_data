@@ -1,0 +1,87 @@
+<!-- 본 파일은 절대로 수정하지 않습니다. -->
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/assets/style/style.css">
+</head>
+
+<body>
+  <h1>1. 편리한 기능이 필요해</h1>
+  <hr>
+
+  <main>
+    <div class="sort-check-box-container">
+      <input type="checkbox" id="verified_check" />
+      <label for="verified_check" class="jsAction">sorting verifed.</label>
+    </div>
+    <div id="table_container">
+      <table id="data_table">
+        <thead>
+          <tr>
+            <td id="index_th" class="sortby" data-sortby="index">index</td>
+            <td id="name_th" class="sortby" data-sortby="name">name</td>
+            <td id="regDate_th" class="sortby" data-sortby="regDate">reg date</td>
+            <td id="verified_th" data-sortby="verified">verified</td>
+          </tr>
+        </thead>
+        <tbody id="data_body"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <button id="top_btn" class="top-btn">top</button>
+  <script>
+    const dataTbody = document.querySelector("#data_body");
+    fetch('/assets/data/data.json')
+      .then(res => res.json())
+      .then(data => {
+        const renderTbody = (data) => {
+          const rows = data.map(element => {
+            const row = document.createElement('tr');
+            const idCell = document.createElement('td');
+            idCell.textContent = element.index;
+            row.appendChild(idCell);
+
+            const nameCell = document.createElement('td');
+            nameCell.textContent = element.name;
+            row.appendChild(nameCell);
+
+            const dateCell = document.createElement('td');
+            dateCell.textContent = element.regDate;
+            row.appendChild(dateCell);
+
+            const verifiedCell = document.createElement('td');
+            verifiedCell.textContent = element.verified;
+            row.appendChild(verifiedCell);
+
+            return row
+          })
+
+          rows.forEach(row => {
+            dataTbody.appendChild(row)
+          })
+        }
+        renderTbody(data)
+      })
+      .catch(error => {
+        console.error(`에러 발생: ${error}`)
+      })
+
+    window.onload = function() {
+      const currentUrl = window.location.href
+
+      if (currentUrl.includes('web')) {
+          const link = document.querySelector('.back-link')
+          link.href = `../`
+      }
+    }
+  </script>
+  <script type="module" src="/src/index.js"></script>
+</body>
+
+</html>
