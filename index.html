@@ -7,33 +7,34 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="/assets/style/style.css">
+  <link rel="icon" href="/assets/favicon.ico" /> 
+  <link rel="stylesheet" href="/assets/style/style.css" />
 </head>
 
 <body>
-  <h1>1. 편리한 기능이 필요해</h1>
-  <hr>
-
-  <main>
-    <div class="sort-check-box-container">
-      <input type="checkbox" id="verified_check" />
-      <label for="verified_check" class="jsAction">sorting verifed.</label>
-    </div>
-    <div id="table_container">
-      <table id="data_table">
-        <thead>
-          <tr>
-            <td id="index_th" class="sortby" data-sortby="index">index</td>
-            <td id="name_th" class="sortby" data-sortby="name">name</td>
-            <td id="regDate_th" class="sortby" data-sortby="regDate">reg date</td>
-            <td id="verified_th" data-sortby="verified">verified</td>
-          </tr>
-        </thead>
-        <tbody id="data_body"></tbody>
-      </table>
-    </div>
-  </main>
-
+  <div class="main-container">
+    <h1>편리한 기능이 필요해</h1>
+    <hr>
+    <main>
+      <div class="sort-check-box-container">
+        <input type="checkbox" id="verified_check" />
+        <label for="verified_check" class="jsAction">Sorting verifed.</label>
+      </div>
+      <div id="table_container">
+        <table id="data_table">
+          <thead>
+            <tr>
+              <td id="index_th" class="sortby" data-sortby="index">index ▾</td>
+              <td id="name_th" class="sortby" data-sortby="name">name ▾</td>
+              <td id="regDate_th" class="sortby" data-sortby="regDate">reg date ▾</td>
+              <td id="verified_th" data-sortby="verified">verified</td>
+            </tr>
+          </thead>
+          <tbody id="data_body"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
   <button id="top_btn" class="top-btn">top</button>
   <script>
     const dataTbody = document.querySelector("#data_body");

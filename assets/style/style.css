@@ -3,9 +3,15 @@
   box-sizing: border-box;
 }
 
+.main-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 100px;
 }
 thead {font-weight: 600;}
 
@@ -67,6 +73,12 @@ tr:nth-child(even) {
 
 .sort-check-box-container {
   margin-bottom: 1.5rem;
+}
+.sort-check-box-container input {
+  scale: 1.5;
+}
+.sort-check-box-container label {
+  font-weight: 600;
 }
 
 td.sortby {
