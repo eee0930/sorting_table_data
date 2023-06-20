@@ -9,17 +9,12 @@ class App {
     this.sortDataList;
     this.hideData;
     this.scrollTop;
-    this.render();
-  }
-
-  render = () => {
     this.settingInitial();
   }
 
   settingInitial = () => {
-    this.setDataList();
-    const $sortbys = document.querySelectorAll(".sortby");
-    const $verified = document.querySelector("#verified_check");
+    this.setDataList(); // table에 있는 data를 object[] 로 변환하여 dataList에 저장
+    const $sortbys = document.querySelectorAll(".sortby"); // sort할 대상 버튼들
     this.sortDataList = new SortDataList({
       $target: this.$target,
       $sortbys: $sortbys,
@@ -28,7 +23,7 @@ class App {
     });
     this.hideData = new HideData({ 
       $target: this.$target, 
-      $trigger: $verified, 
+      trigger: "#verified_check", 
       hideData: "verified", 
       dataList: this.dataList,
       handleHide: this.handleChangeTrigger,
@@ -36,6 +31,9 @@ class App {
     this.scrollTop = new ScrollTop("#top_btn");
   }
 
+  /**
+   * table 안 데이터를 object list로 정리
+   */
   setDataList = () => {
     const $keys = Array.from(document.querySelectorAll("thead td"));
     const keys = $keys.map($key => $key.dataset.sortby);
@@ -51,26 +49,34 @@ class App {
     });
   }
 
+  /**
+   * SortDataList class의 sort 버튼들에 적용할 이벤트 함수
+   * @param {*} event 
+   */
   handleClickSortData = (event) => {
     const { target } = event;
     const sortby = target.dataset.sortby;
     if(target.classList.contains("isDecre")) {
       target.classList.remove("isDecre");
-      this.sortDataList.settingSortDataList(sortby, false);
+      this.sortDataList.settingSortDataList(sortby, false); // from SortDataList
     } else {
       target.classList.add("isDecre");
-      this.sortDataList.settingSortDataList(sortby, true);
+      this.sortDataList.settingSortDataList(sortby, true); // from SortDataList
     }
-    this.$target = this.sortDataList.getTarget();
-    this.hideData.setTarget(this.$target);
+    this.$target = this.sortDataList.getTarget(); // from SortDataList
+    this.hideData.setTarget(this.$target); // from HideData
   }
 
+  /**
+   * HideData class의 data를 hide할 checkbox에 적용할 이벤트 함수
+   * @param {*} event 
+   */
   handleChangeTrigger = (event) => {
     const $target = event.target;
-    this.hideData.settingDataList($target.checked);
+    this.hideData.settingDataList($target.checked); // from HideData
 
-    this.$target = this.hideData.getTarget();
-    this.sortDataList.setTarget(this.$target);
+    this.$target = this.hideData.getTarget(); // from HideData
+    this.sortDataList.setTarget(this.$target); // from SortDataList
   }
  
 }

@@ -6,10 +6,10 @@ class ScrollTop {
    */
   constructor($btn) {
     this.$btn = document.querySelector($btn);
-    this.setting();
+    this.settingInitial();
   }
 
-  setting = () => {
+  settingInitial = () => {
     window.addEventListener("scroll", this.handleShowBtn);
     this.$btn.addEventListener("click", this.handleClickTop);
   }

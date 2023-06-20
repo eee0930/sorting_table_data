@@ -1,26 +1,39 @@
 class SortDataList {
+  /**
+   * $target: sort를 적용할 대상 table,
+   * $sortbys: sort event를 발생시킬 버튼들,
+   * dataList: table 안 데이터들,
+   * handleSort: sort event 함수,
+   * @param {object} sortDataList 
+   */
   constructor({ $target, $sortbys, dataList, handleSort }) {
     this.$target  = $target;
     this.$sortbys = $sortbys;
     this.dataList = dataList;
     this.handleClickSortData = handleSort;
-    this.$trs;
+    this.$trs = Array.from(this.$target.querySelectorAll("tr"));
     this.settingInitial();
   }
 
   render = ($trs) => {
-    this.removeChildrenEle(this.$target);
+    this.removeChildrenByEle(this.$target);
     $trs.map($tr => this.$target.appendChild($tr));
   }
 
   settingInitial = () => {
-    this.setTrs();
     this.$trs.map(($tr, i) => $tr.dataset.sortIdx = i);
     this.$sortbys.forEach($sort => 
       $sort.addEventListener("click", this.handleClickSortData)
     );
   }
 
+  /**
+   * [handleClickSortData에 의해 호출됨]
+   * sortby로 데이터 재정리
+   * @method
+   * @param {string} sortby 
+   * @param {boolean} isDecre 
+   */
   settingSortDataList = (sortby, isDecre) => {
     const $trs = Array.from(this.$target.querySelectorAll("tr"));
     $trs.sort((a, b) => this.sortData(a, b, isDecre, sortby));
@@ -55,14 +68,10 @@ class SortDataList {
 
   setTarget = ($target) => {
     this.$target = $target;
-    this.setTrs();
-  }
-
-  setTrs = () => {
     this.$trs = Array.from(this.$target.querySelectorAll("tr"));
   }
 
-  removeChildrenEle = ($ele) => {
+  removeChildrenByEle = ($ele) => {
     while($ele.firstChild) {
       $ele.removeChild($ele.firstChild);
     }
