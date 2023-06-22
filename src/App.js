@@ -32,7 +32,7 @@ class App {
   }
 
   /**
-   * table 안 데이터를 object list로 정리
+   * table에 있는 데이터를 object list로 정리
    */
   setDataList = () => {
     const $keys = Array.from(document.querySelectorAll("thead td"));
@@ -46,7 +46,7 @@ class App {
         data[keys[i]] = isNaN(+text) ? text : (+text);
       }
       this.dataList.push(data);
-    });
+    }); 
   }
 
   /**
